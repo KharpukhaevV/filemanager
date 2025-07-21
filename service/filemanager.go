@@ -3,9 +3,9 @@ package service
 import (
 	"archive/zip"
 	"fmt"
-	"github.com/KharpukhaevV/filemanger/icons"
-	"github.com/KharpukhaevV/filemanger/models"
-	"github.com/KharpukhaevV/filemanger/utils"
+	"github.com/KharpukhaevV/filemanager/icons"
+	"github.com/KharpukhaevV/filemanager/models"
+	"github.com/KharpukhaevV/filemanager/utils"
 	"io"
 	"os"
 	"path/filepath"

@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/KharpukhaevV/filemanger/service"
-	"github.com/KharpukhaevV/filemanger/utils"
+	"github.com/KharpukhaevV/filemanager/service"
+	"github.com/KharpukhaevV/filemanager/utils"
 	"os"
 	"path/filepath"
 

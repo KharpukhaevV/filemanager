@@ -3,7 +3,7 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/KharpukhaevV/filemanger/models"
+	"github.com/KharpukhaevV/filemanager/models"
 	"github.com/charmbracelet/lipgloss"
 	"os"
 	"path/filepath"

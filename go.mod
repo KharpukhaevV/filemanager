@@ -1,4 +1,4 @@
-module github.com/KharpukhaevV/filemanger
+module github.com/KharpukhaevV/filemanager
 
 go 1.24.3
 
