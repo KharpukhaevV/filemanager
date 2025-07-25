@@ -104,6 +104,7 @@ func (m *FileManagerState) navigateBack() {
 
 		if m.prevCursorPos >= 0 && m.prevCursorPos < len(m.files) {
 			m.cursor = m.prevCursorPos
+			m.offset = min(m.cursor-m.visibleItems+1, len(m.files)-m.visibleItems)
 		} else {
 			baseName := filepath.Base(m.archivePath)
 			for i, f := range m.files {
@@ -136,14 +137,16 @@ func (m *FileManagerState) navigateBack() {
 	if pos, exists := m.cursorPositions[parent]; exists {
 		if pos < len(m.files) {
 			m.cursor = pos
+			m.offset = min(m.cursor-m.visibleItems+1, len(m.files)-m.visibleItems)
 		} else {
 			m.cursor = 0
+			m.offset = 0
 		}
 	} else {
 		m.cursor = 0
+		m.offset = 0
 	}
 
-	m.offset = 0
 	m.preview = false
 }
 
@@ -159,14 +162,16 @@ func (m *FileManagerState) handleEnter() (tea.Model, tea.Cmd) {
 		if pos, exists := m.cursorPositions[newPath]; exists {
 			if pos < len(m.files) {
 				m.cursor = pos
+				m.offset = min(m.cursor-m.visibleItems+1, len(m.files)-m.visibleItems)
 			} else {
 				m.cursor = 0
+				m.offset = 0
 			}
 		} else {
 			m.cursor = 0
+			m.offset = 0
 		}
 
-		m.offset = 0
 	} else if utils.IsZipArchive(selected.Name()) {
 		m.prevCursorPos = m.cursor
 		archivePath := filepath.Join(m.Cwd, selected.Name())
