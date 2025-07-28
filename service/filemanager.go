@@ -98,7 +98,7 @@ func (m *FileManagerState) View() string {
 		topLine = models.Stls.TopLine.Render(m.Cwd)
 	}
 
-	leftContent := m.renderNavigation(leftWidth, panelHeight)
+	leftContent := m.renderNavigation(leftWidth)
 
 	var rightContent string
 	if m.preview {
@@ -110,20 +110,19 @@ func (m *FileManagerState) View() string {
 	}
 
 	borderStyle := models.Stls.BorderStyle
-	leftBox := borderStyle.Copy().
+	leftBox := borderStyle.
 		Width(leftWidth).
 		Height(m.height - 4).
 		Render(leftContent)
 
-	rightBox := borderStyle.Copy().
+	rightBox := borderStyle.
 		Width(rightWidth).
 		Height(m.height - 4).
 		Render(rightContent)
 
 	mainContent := lipgloss.JoinHorizontal(lipgloss.Top, leftBox, rightBox)
 
-	status := models.Stls.Header.Copy().
-		Width(m.width).
+	status := models.Stls.Header.Width(m.width).
 		Render(fmt.Sprintf("↑/↓: навигация | Enter: открыть | Пробел: превью | b: назад | q: выход | SFTP: %s (%s)", m.remoteHost, func() string {
 			if m.isRemote {
 				if m.status != "" {
@@ -143,7 +142,7 @@ func (m *FileManagerState) View() string {
 	return fullUI
 }
 
-func (m *FileManagerState) renderNavigation(width, height int) string {
+func (m *FileManagerState) renderNavigation(width int) string {
 	var sb strings.Builder
 
 	sb.WriteString(models.Stls.Header.Render(
@@ -307,13 +306,13 @@ func (m *FileManagerState) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			case "ctrl+c", "q":
 				return m, tea.Quit
 			case "ctrl+k":
-				for i := 0; i < 10; i++ {
-					m.previewView.LineUp(1)
+				for range 10 {
+					m.previewView.ScrollUp(1)
 				}
 				return m, nil
 			case "ctrl+j":
-				for i := 0; i < 10; i++ {
-					m.previewView.LineDown(1)
+				for range 10 {
+					m.previewView.ScrollDown(1)
 				}
 				return m, nil
 			case "ctrl+u":

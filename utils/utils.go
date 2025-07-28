@@ -25,20 +25,6 @@ func FormatSize(size int64) string {
 	return fmt.Sprintf("%.1f MB", float64(size)/(1024*1024))
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 func TruncateFileName(name string, maxLen int) string {
 	if len(name) <= maxLen {
 		return name
